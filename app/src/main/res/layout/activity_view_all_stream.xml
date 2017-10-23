@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ee382v.sparrow.ee382v_sparrow_mini_phase3.ViewAllStream">
+
+    <GridView
+        android:id="@+id/viewAllCanvas"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="10dp"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:visibility="visible">
+
+    </GridView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_alignLeft="@+id/viewAllCanvas"
+        android:layout_alignStart="@+id/viewAllCanvas"
+        android:layout_below="@+id/viewAllCanvas"
+        android:layout_alignRight="@+id/viewAllCanvas"
+        android:layout_alignEnd="@+id/viewOneCanvas">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/viewAllSearchText"
+                android:layout_width="236dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/view_all_search_hint"
+                android:inputType="textPersonName" />
+
+            <ImageButton
+                android:id="@+id/viewAllNearby"
+                android:layout_width="51dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:contentDescription="@string/view_all_earch_icon"
+                android:onClick="goToNearbyStreams"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/earth" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/viewAllSearchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/view_all_search_btn" />
+
+        <Button
+            android:id="@+id/viewAllSubStreams"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/view_all_sub_streams" />
+    </LinearLayout>
+
+</android.widget.RelativeLayout>
+

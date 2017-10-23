@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">EE382V_Sparrow_mini_phase3</string>
+    <string name="app_name">ee382v_sparrow_mini_phase3</string>
+    <string name="main_to_view">Go to view stream</string>
+    <string name="main_hint">Enter name</string>
+    <string name="title">Connexus</string>
+    <string name="view_one_stream_line">View A Stream: </string>
+    <string name="view_one_stream_more_pic">More Picture</string>
+    <string name="view_one_stream_upload">Upload an Image</string>
+    <string name="view_one_stream_streams">Streams</string>
+    <string name="view_all_search_hint">Search Streams</string>
+    <string name="view_all_search_btn">Search</string>
+    <string name="view_all_sub_streams">My Subscribed Streams</string>
+    <string name="view_all_earch_icon">Earth icon link to view nearby stream</string>
 </resources>

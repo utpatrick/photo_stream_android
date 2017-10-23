@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ee382v.sparrow.ee382v_sparrow_mini_phase3.ViewOneStream">
+
+    <TextView
+        android:id="@+id/viewOneStream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_one_stream_line"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <GridView
+        android:id="@+id/viewOneCanvas"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/viewOneStream"
+        android:layout_margin="10dp"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:visibility="visible">
+
+    </GridView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_alignLeft="@+id/viewOneCanvas"
+        android:layout_alignStart="@+id/viewOneCanvas"
+        android:layout_below="@+id/viewOneCanvas">
+
+        <Button
+            android:id="@+id/viewOneMore"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="0.05"
+            android:text="@string/view_one_stream_more_pic" />
+
+        <Button
+            android:id="@+id/viewOneUpload"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/view_one_stream_upload" />
+
+        <Button
+            android:id="@+id/viewOneStreams"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/view_one_stream_streams" />
+    </LinearLayout>
+
+</android.widget.RelativeLayout>
