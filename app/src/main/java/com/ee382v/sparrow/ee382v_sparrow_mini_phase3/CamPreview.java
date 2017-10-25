@@ -1,7 +1,7 @@
 package com.ee382v.sparrow.ee382v_sparrow_mini_phase3;
 
 /**
- * @author Jose Davis Nidhin
+ * Created by Patrick on 10/23/2017.
  */
 
 import java.io.IOException;
