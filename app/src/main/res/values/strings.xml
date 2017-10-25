@@ -7,8 +7,12 @@
     <string name="view_one_stream_more_pic">More Picture</string>
     <string name="view_one_stream_upload">Upload an Image</string>
     <string name="view_one_stream_streams">Streams</string>
+    <string name="view_one_more_pictures">More Pictures</string>
     <string name="view_all_search_hint">Search Streams</string>
     <string name="view_all_search_btn">Search</string>
     <string name="view_all_sub_streams">My Subscribed Streams</string>
     <string name="view_all_earch_icon">Earth icon link to view nearby stream</string>
+    <string name="view_nearby_text">Nearby pictures</string>
+    <string name="view_nearby_more">More</string>
+    <string name="view_nearby_all_stream">View All Streams</string>
 </resources>

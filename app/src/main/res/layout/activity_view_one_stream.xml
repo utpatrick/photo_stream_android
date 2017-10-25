@@ -17,7 +17,7 @@
     <GridView
         android:id="@+id/viewOneCanvas"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:layout_below="@+id/viewOneStream"
         android:layout_margin="10dp"
         android:columnWidth="90dp"
@@ -41,20 +41,27 @@
         <Button
             android:id="@+id/viewOneMore"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="0dp"
             android:layout_weight="0.05"
             android:text="@string/view_one_stream_more_pic" />
 
         <Button
+            android:id="@+id/viewOneMorePics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="morePictures"
+            android:text="@string/view_one_more_pictures" />
+
+        <Button
             android:id="@+id/viewOneUpload"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="@string/view_one_stream_upload" />
 
         <Button
             android:id="@+id/viewOneStreams"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="@string/view_one_stream_streams" />
     </LinearLayout>
 

@@ -42,10 +42,11 @@ public class ViewAllStream extends AppCompatActivity {
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject obj = response.getJSONObject(i);
-                        items.add(new GridItem(obj.getString("stream_name"), obj.getString("cover_image")));
+                        items.add(new GridItem(obj.getString("stream_name"),
+                                obj.getString("cover_image")));
                     }
                     GridViewAdapter adapter = new GridViewAdapter(ViewAllStream.this, R.layout.grid_item,items);
-                    GridView gv = (GridView) findViewById(R.id.viewAllCanvas);
+                    GridView gv = findViewById(R.id.viewAllCanvas);
                     gv.setAdapter(adapter);
 
                     gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

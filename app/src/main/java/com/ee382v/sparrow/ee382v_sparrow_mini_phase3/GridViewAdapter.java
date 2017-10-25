@@ -54,6 +54,7 @@ public class GridViewAdapter extends ArrayAdapter<GridItem> {
         }
         GridItem item = items.get(position);
         holder.titleTextView.setText(item.getTitle());
+        if (item.getExtra() != null) holder.titleTextView.setTag(item.getExtra());
         holder.imageView.setTag(item.getLink());
         String link = item.getLink();
         Log.w("in adapter", link);
