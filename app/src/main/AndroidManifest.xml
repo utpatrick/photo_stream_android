@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ee382v.sparrow.ee382v_sparrow_mini_phase3">
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +26,14 @@
         <activity android:name=".ViewAllStream" />
         <activity android:name=".ViewOneStream" />
         <activity android:name=".ViewNearbyStream" />
-        <activity android:name=".ViewImage"></activity>
+        <activity android:name=".ViewImage" />
+        <activity
+            android:label="@string/app_name"
+            android:name=".CamActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name=".Upload" />
+
     </application>
 
 </manifest>
