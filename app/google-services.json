@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "970968287353",
+    "project_id": "mini-trival"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970968287353:android:b3a0f68b4ac8929d",
+        "android_client_info": {
+          "package_name": "com.ee382v.sparrow.ee382v_sparrow_mini_phase3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970968287353-5rlt1cmqs4ucsfet5iv1bm8u3ub0kquu.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "970968287353-a8safesah3rdh9nqt2i3me0ct8fi9dh6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ee382v.sparrow.ee382v_sparrow_mini_phase3",
+            "certificate_hash": "d5d42cdd85df4dd1859e736a56e374795b970194"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADhMEf3kbED9mHZt9iTCkdyGL_xnxH0Qs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
