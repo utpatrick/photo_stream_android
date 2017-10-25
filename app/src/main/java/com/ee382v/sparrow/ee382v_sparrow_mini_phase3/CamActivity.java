@@ -199,9 +199,6 @@ public class CamActivity extends AppCompatActivity {
 
     public void useThisPhoto(View view) {
         Intent returnIntent = new Intent();
-        Log.d(TAG, "gg dir from here" + Uri.fromFile(dir).toString());
-        Log.d(TAG, "gg filename from here" + Uri.fromFile(new File(fileName)).toString());
-        Log.d(TAG, "gg uri from here" + Uri.fromFile(new File(dir, fileName)).toString());
         returnIntent.setData(Uri.fromFile(new File(dir, fileName)));
         setResult(Activity.RESULT_OK,returnIntent);
         finish();

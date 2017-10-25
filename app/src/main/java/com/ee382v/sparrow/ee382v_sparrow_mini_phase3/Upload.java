@@ -55,7 +55,6 @@ public class Upload extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 if (data != null) {
                     Uri photoUri = data.getData();
-                    Log.d("uri_trial", "this is the working example" + photoUri.toString());
                     // Do something with the photo based on Uri
                     Bitmap selectedImage = null;
                     try {
@@ -72,7 +71,7 @@ public class Upload extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 if (data != null) {
                     Uri photoUri = data.getData();
-                    Log.d("uri_trial", "this is the photo example " + photoUri.getPath());
+                    //Log.d("uri_trial", "this is the photo example " + photoUri.getPath());
                     Bitmap selectedImage = null;
 
                     BitmapFactory.Options bmOptions = new BitmapFactory.Options();
