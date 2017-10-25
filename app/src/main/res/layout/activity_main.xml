@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.ee382v.sparrow.ee382v_sparrow_mini_phase3.MainActivity">
 
-
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
