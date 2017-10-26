@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     // 10.0.2.2 is the localhost on dev machine
+    //Now the End_Point is my deployed project for the convience of testing
     private static final String BACKEND_ENDPOINT = "https://connex-xiaocheng.appspot.com";
     public static final String EXTRA_MESSAGE = "com.ees82v.sparrow.mainactivity";
     private Button SignOut;
