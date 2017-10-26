@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "37013752592",
+    "project_id": "minitrial-181200"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37013752592:android:b3a0f68b4ac8929d",
+        "android_client_info": {
+          "package_name": "com.ee382v.sparrow.ee382v_sparrow_mini_phase3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37013752592-i0ddmfanmgvp2rsh54a2kvd5bmtk4i6i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ee382v.sparrow.ee382v_sparrow_mini_phase3",
+            "certificate_hash": "1787443371499e41bf1e85e1d78de9fe0a3878df"
+          }
+        },
+        {
+          "client_id": "37013752592-noqmfg3hpdj7mq7n83u7v53jptu3t9d2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIokos-5rw-L1w1QmHQOSXpGuBpvHGseE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
