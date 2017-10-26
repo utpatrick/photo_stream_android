@@ -31,9 +31,9 @@ public class ViewAllStream extends AppCompatActivity {
         Intent intent = getIntent();
         //this line is for testing only
         //String user = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String user = "185804764220139124118";
+        String user_email = "test@example.com";
 
-        String url = MainActivity.getEndpoint() + "/android/view_all_streams?user_id=" + user;
+        String url = MainActivity.getEndpoint() + "/android/view_all_streams?user_email=" + user_email;
         Log.w("url: ", url);
         JsonArrayRequest jsonRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
