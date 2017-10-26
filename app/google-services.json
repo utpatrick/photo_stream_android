@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "617693184495",
+    "project_id": "connexus-180902"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617693184495:android:b3a0f68b4ac8929d",
+        "android_client_info": {
+          "package_name": "com.ee382v.sparrow.ee382v_sparrow_mini_phase3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617693184495-929neuc5qc50dao84g00nk382hi02slf.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "617693184495-97gn6n9k9g2179fb10iaj3ljt5ro1k2a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ee382v.sparrow.ee382v_sparrow_mini_phase3",
+            "certificate_hash": "ef9798a3f65d1b7dab97da7d988e9fdfd36dc3bc"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_9vGe9vEK3wPObycjaM0vkcnMSf30GRw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
