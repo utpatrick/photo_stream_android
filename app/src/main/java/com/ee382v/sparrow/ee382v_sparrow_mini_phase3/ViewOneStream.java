@@ -76,4 +76,14 @@ public class ViewOneStream extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(jsonRequest);
     }
+
+    public void goToUpload(View view) {
+        Intent intent = new Intent(this, Upload.class);
+        startActivity(intent);
+    }
+
+    public void goToAllStreams(View view) {
+        Intent intent = new Intent(this, ViewAllStream.class);
+        startActivity(intent);
+    }
 }

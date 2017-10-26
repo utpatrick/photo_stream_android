@@ -56,12 +56,14 @@
             android:id="@+id/viewOneUpload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="goToUpload"
             android:text="@string/view_one_stream_upload" />
 
         <Button
             android:id="@+id/viewOneStreams"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="goToAllStreams"
             android:text="@string/view_one_stream_streams" />
     </LinearLayout>
 

@@ -31,7 +31,7 @@ public class ViewAllStream extends AppCompatActivity {
         Intent intent = getIntent();
         //this line is for testing only
         //String user = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String user_email = "test@example.com";
+        String user_email = MainActivity.getUserEmail();
 
         String url = MainActivity.getEndpoint() + "/android/view_all_streams?user_email=" + user_email;
         Log.w("url: ", url);
