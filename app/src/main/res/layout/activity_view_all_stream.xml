@@ -9,7 +9,7 @@
     <GridView
         android:id="@+id/viewAllCanvas"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:layout_margin="10dp"
         android:columnWidth="90dp"
         android:gravity="center"

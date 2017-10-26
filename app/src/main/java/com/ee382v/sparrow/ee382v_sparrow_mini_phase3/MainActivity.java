@@ -24,7 +24,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
@@ -37,11 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String EXTRA_MESSAGE = "com.ees82v.sparrow.mainactivity";
     private Button SignOut;
     private SignInButton SignIn;
-    //private TextView Name;
     private GoogleApiClient googleApiClient;
     private static final int REQ_CODE = 9001;
-    String name;
-    String email;
+    static String name;
+    static String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public static String getUserEmail(){
+        return email;
+    }
+
     public void goToView(View view) {
         Intent intent = new Intent(MainActivity.this, ViewAllStream.class);
         EditText nameField = (EditText) findViewById(R.id.mainName);
@@ -70,10 +72,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    public void goToUpload(View view) {
-        Intent intent = new Intent(this, Upload.class);
-        startActivity(intent);
-    }
 
     public static String getEndpoint() {
         return BACKEND_ENDPOINT;
@@ -117,14 +115,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
-            this.name = account.getDisplayName();
-            this.email = account.getEmail();
-            updateUI(true);
+            if (account != null) {
+                this.name = account.getDisplayName();
+                this.email = account.getEmail();
+                updateUI(true);
+            }
+            Intent intent = new Intent(this, ViewAllStream.class);
+            startActivity(intent);
         }
         else{
             updateUI(false);
         }
-
     }
 
     private void updateUI(boolean isLogin){

@@ -8,10 +8,16 @@ public class GridItem {
 
     private String title;
     private String link;
+    private String extra;
 
     public GridItem(String title, String link) {
         this.title = title;
         this.link = link;
+    }
+
+    public GridItem(String title, String link, String extra) {
+        this(title, link);
+        this.extra = extra;
     }
 
     public String getLink() {
@@ -20,6 +26,10 @@ public class GridItem {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getExtra() {
+        return extra;
     }
 
 }

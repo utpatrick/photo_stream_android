@@ -31,9 +31,9 @@ public class ViewAllStream extends AppCompatActivity {
         Intent intent = getIntent();
         //this line is for testing only
         //String user = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String user = "185804764220139124118";
+        String user_email = MainActivity.getUserEmail();
 
-        String url = MainActivity.getEndpoint() + "/android/view_all_streams?user_id=" + user;
+        String url = MainActivity.getEndpoint() + "/android/view_all_streams?user_email=" + user_email;
         Log.w("url: ", url);
         JsonArrayRequest jsonRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
@@ -42,10 +42,11 @@ public class ViewAllStream extends AppCompatActivity {
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject obj = response.getJSONObject(i);
-                        items.add(new GridItem(obj.getString("stream_name"), obj.getString("cover_image")));
+                        items.add(new GridItem(obj.getString("stream_name"),
+                                obj.getString("cover_image")));
                     }
                     GridViewAdapter adapter = new GridViewAdapter(ViewAllStream.this, R.layout.grid_item,items);
-                    GridView gv = (GridView) findViewById(R.id.viewAllCanvas);
+                    GridView gv = findViewById(R.id.viewAllCanvas);
                     gv.setAdapter(adapter);
 
                     gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
