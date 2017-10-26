@@ -3,18 +3,14 @@ package com.ee382v.sparrow.ee382v_sparrow_mini_phase3;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.support.annotation.NonNull;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -32,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     // 10.0.2.2 is the localhost on dev machine
-    private static final String BACKEND_ENDPOINT = "http://10.0.2.2:8080";
+    private static final String BACKEND_ENDPOINT = "https://connex-xiaocheng.appspot.com";
     public static final String EXTRA_MESSAGE = "com.ees82v.sparrow.mainactivity";
     private Button SignOut;
     private SignInButton SignIn;
