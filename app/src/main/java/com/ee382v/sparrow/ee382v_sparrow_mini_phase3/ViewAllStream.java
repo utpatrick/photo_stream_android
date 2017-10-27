@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -57,7 +56,7 @@ public class ViewAllStream extends AppCompatActivity {
                                 obj.getString("cover_image")));
                     }
                     GridViewAdapter adapter = new GridViewAdapter(ViewAllStream.this, R.layout.grid_item,items);
-                    GridView gv = findViewById(R.id.viewAllCanvas);
+                    GridView gv = (GridView) findViewById(R.id.viewAllCanvas);
                     gv.setAdapter(adapter);
                     gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
