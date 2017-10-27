@@ -3,7 +3,6 @@ package com.ee382v.sparrow.ee382v_sparrow_mini_phase3;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 public class ViewAllStream extends AppCompatActivity {
 
     static String SELECTED_STREAM = "com.ee382v.sparrow.viewallstream.SELECTED_STREAM";
+    static String SUB_STREAM = "com.ee382v.sparrow.viewallstream.SUB_STREAM";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,6 @@ public class ViewAllStream extends AppCompatActivity {
         String user_email = MainActivity.getUserEmail();
 
         String url = MainActivity.getEndpoint() + "/android/view_all_streams?user_email=" + user_email;
-        Log.w("url: ", url);
         JsonArrayRequest jsonRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -65,7 +64,6 @@ public class ViewAllStream extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.w("from on error", "on error");
                 error.printStackTrace();
             }
         });
@@ -79,5 +77,12 @@ public class ViewAllStream extends AppCompatActivity {
 
     public void goToSearchPage(View view) {
         //TODO
+    }
+
+    public void toToSubstribed(View view) {
+        if (MainActivity.getUserEmail() == null) return;
+        Intent intent = new Intent(this, ViewOneStream.class);
+        intent.putExtra(SUB_STREAM, "subscribed by " + MainActivity.getUserName());
+        startActivity(intent);
     }
 }
