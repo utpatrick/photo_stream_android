@@ -99,6 +99,7 @@ public class ViewNearbyStream extends AppCompatActivity implements GoogleApiClie
         }
         String url = MainActivity.getEndpoint() + "/android/view_nearby_images?latitude=" + latitude +
                 "&longitude=" + longitude + "&start=" + start;
+        Log.w("nearby", url);
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

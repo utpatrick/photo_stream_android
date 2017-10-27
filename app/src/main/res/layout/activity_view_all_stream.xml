@@ -9,7 +9,7 @@
     <GridView
         android:id="@+id/viewAllCanvas"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:layout_margin="10dp"
         android:columnWidth="90dp"
         android:gravity="center"
@@ -67,7 +67,6 @@
             android:id="@+id/viewAllSubStreams"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:onClick="toToSubstribed"
             android:text="@string/view_all_sub_streams" />
     </LinearLayout>
 
