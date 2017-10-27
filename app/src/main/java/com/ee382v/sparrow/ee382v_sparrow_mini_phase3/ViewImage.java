@@ -19,6 +19,6 @@ public class ViewImage extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.view_image_title);
         ImageView imageView = (ImageView) findViewById(R.id.view_image_image);
         textView.setText(content[1]);
-        Picasso.with(this).load(content[0]).into(imageView);
+        Picasso.with(this).load(content[0]).resize(1920, 1080).into(imageView);
     }
 }

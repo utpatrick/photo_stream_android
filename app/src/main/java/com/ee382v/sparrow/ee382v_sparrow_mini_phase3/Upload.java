@@ -1,9 +1,11 @@
 package com.ee382v.sparrow.ee382v_sparrow_mini_phase3;
 
 import android.app.ProgressDialog;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -71,6 +73,18 @@ public class Upload extends AppCompatActivity implements GoogleApiClient.Connect
         setContentView(R.layout.activity_upload);
         Button uploadButton = (Button)findViewById(R.id.uploadBtn);
 
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        }
         Intent intent = getIntent();
         streamName = intent.getStringExtra(ViewOneStream.THIS_STREAM);
         Log.d("stream", "stream name:  " + streamName);
