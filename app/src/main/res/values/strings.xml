@@ -30,4 +30,7 @@
     <string name="camera_not_found">No camera harware found</string>
     <string name="take_photo_help">Touch anywhere on screen to take picture</string>
     <string name="go_to_upload">Upload photo</string>
+
+    <string name="facebook_app_id">330584184081032</string>
+    <string name="fb_login_protocol_scheme">fb330584184081032</string>
 </resources>
