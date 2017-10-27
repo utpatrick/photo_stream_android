@@ -1,48 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.ee382v.sparrow.ee382v_sparrow_mini_phase3.ViewAllStream">
-
-    <GridView
-        android:id="@+id/viewAllCanvas"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_margin="10dp"
-        android:columnWidth="90dp"
-        android:gravity="center"
-        android:horizontalSpacing="10dp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="10dp"
-        android:visibility="visible">
-
-    </GridView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="97dp"
+        android:layout_alignBottom="@+id/viewAllCanvas"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        android:weightSum="1"
-        android:layout_alignLeft="@+id/viewAllCanvas"
-        android:layout_alignStart="@+id/viewAllCanvas"
-        android:layout_below="@+id/viewAllCanvas"
-        android:layout_alignRight="@+id/viewAllCanvas"
-        android:layout_alignEnd="@+id/viewOneCanvas">
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/viewAllSearchText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/view_all_search_hint"
+            android:inputType="textShortMessage" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/viewAllSearchText"
-                android:layout_width="236dp"
+            <Button
+                android:id="@+id/viewAllSearchBtn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/view_all_search_hint"
-                android:inputType="textShortMessage" />
+                android:layout_weight="0.58"
+                android:onClick="goToSearchPage"
+                android:text="@string/view_all_search_btn" />
 
             <ImageButton
                 android:id="@+id/viewAllNearby"
@@ -55,22 +49,42 @@
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/earth" />
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nearby Stream" />
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/viewAllSearchBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:onClick="goToSearchPage"
-            android:text="@string/view_all_search_btn" />
-
-        <Button
-            android:id="@+id/viewAllSubStreams"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:onClick="toToSubstribed"
-            android:text="@string/view_all_sub_streams" />
     </LinearLayout>
 
-</android.widget.RelativeLayout>
+    <Button
+        android:id="@+id/viewAllSubStreams"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:onClick="toToSubstribed"
+        android:text="@string/view_all_sub_streams" />
+
+    <GridView
+        android:id="@+id/viewAllCanvas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/viewAllSubStreams"
+        android:layout_marginTop="20dp"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:visibility="visible">
+
+    </GridView>
+
+</LinearLayout>
 

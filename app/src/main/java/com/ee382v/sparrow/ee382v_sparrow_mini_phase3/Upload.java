@@ -2,13 +2,18 @@ package com.ee382v.sparrow.ee382v_sparrow_mini_phase3;
 
 import android.app.ProgressDialog;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -28,6 +33,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +51,7 @@ import java.util.Map;
  * Created by Patrick on 10/23/2017.
  */
 
-public class Upload extends AppCompatActivity {
+public class Upload extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     // PICK_PHOTO_CODE is a constant integer
     public final static int PICK_PHOTO_CODE = 1046;
@@ -56,12 +64,31 @@ public class Upload extends AppCompatActivity {
     String filename;
     ProgressDialog progressDialog;
     private String streamName = "";
+    private Location location;
+    private GoogleApiClient mGoogleApiClient;
+    private double latitude = 0, longitude = 0;
+    String gps_info;
+    public static final String TAG = Upload.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
         Button uploadButton = (Button)findViewById(R.id.uploadBtn);
+
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        }
+
         Intent intent = getIntent();
         streamName = intent.getStringExtra(ViewOneStream.THIS_STREAM);
         Log.d("stream", "stream name:  " + streamName);
@@ -132,6 +159,47 @@ public class Upload extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Log.i(TAG, "Location services connected.");
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        }
+        if (location != null) {
+            Log.d("status", "location is on");
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        }
+        gps_info = (Double.toString(latitude) + ", " + Double.toString(longitude));
+        Log.d("lat", "lat: " + latitude);
+        Log.d("long", "long: " + longitude);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.i(TAG, "Location services suspended. Please reconnect.");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
     public void uploadImageBtn(View view){
         getUploadUrl(photoUri, "gg", "ggg");
     }
@@ -184,7 +252,26 @@ public class Upload extends AppCompatActivity {
                 try {
                     JSONObject result = new JSONObject(resultResponse);
                     String status = result.getString("status");
-                    String message = result.getString("message");
+                    String lat = result.getString("lat");
+                    String longG = result.getString("longG");
+                    Log.d("image", "lat: " + lat);
+                    Log.d("image", "long: " + longG);
+
+
+                    if(status.equals("ok")){
+                        if(progressDialog.isShowing()) progressDialog.dismiss();
+                    }
+                    AlertDialog alertDialog = new AlertDialog.Builder(Upload.this).create();
+                    alertDialog.setTitle("Upload Successful!");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -209,16 +296,6 @@ public class Upload extends AppCompatActivity {
 
                         Log.e("Error Status", status);
                         Log.e("Error Message", message);
-
-                        if (networkResponse.statusCode == 404) {
-                            errorMessage = "Resource not found";
-                        } else if (networkResponse.statusCode == 401) {
-                            errorMessage = message+" Please login again";
-                        } else if (networkResponse.statusCode == 400) {
-                            errorMessage = message+ " Check your inputs";
-                        } else if (networkResponse.statusCode == 500) {
-                            errorMessage = message+" Something is getting wrong";
-                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -230,6 +307,9 @@ public class Upload extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                Log.d("tag", "gps_info: " + gps_info);
+                params.put("lat", Double.toString(latitude));
+                params.put("long", Double.toString(longitude));
                 params.put("title", filename);
                 params.put("stream", streamName);
                 params.put("user_email", MainActivity.getUserEmail());
@@ -242,7 +322,6 @@ public class Upload extends AppCompatActivity {
                 // file name could found file base or direct access from real path
                 // for now just get bitmap data from ImageView
                 params.put("image", new DataPart("trial", AppHelper.getFileDataFromDrawable(getBaseContext(), ivPreview.getDrawable()), "image/jpeg"));
-
                 return params;
             }
         };
