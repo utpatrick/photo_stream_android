@@ -8,15 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/captured_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:contentDescription="@string/desc" />
-
     <FrameLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
@@ -33,53 +24,67 @@
     </FrameLayout>
 
     <LinearLayout
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/layout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:orientation="vertical">
+        android:layout_marginTop="22dp">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/layout"
-            android:layout_marginTop="18dp"
-            android:layout_weight="1"
-            android:text="@string/capture_button" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/button4"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="1"
-            android:onClick="useThisPhoto"
-            android:text="use this photo" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_weight="1"
-            android:onClick="goToView"
-            android:text="gotoview" />
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <!-- Button
-        android:id="@+id/btnCapture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/round_button"
-        android:text="@string/btn_capture" /-->
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/layout"
+                android:layout_marginTop="18dp"
+                android:layout_weight="1"
+                android:text="@string/capture_button" />
+
+            <Button
+                android:id="@+id/use_this_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/button4"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:onClick="useThisPhoto"
+                android:text="use this photo" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:onClick="goToView"
+                android:text="gotoview" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/captured_image"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/cast_libraries_material_featurehighlight_text_vertical_space"
+            android:layout_weight="0.48"
+            android:contentDescription="@string/desc" />
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -25,10 +25,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewAllStream" />
+        <activity
+            android:name=".ViewAllStream"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ViewOneStream" />
         <activity android:name=".ViewNearbyStream" />
         <activity android:name=".ViewImage" />
+        <activity android:name=".SearchStream"/>
         <activity
             android:label="@string/app_name"
             android:name=".CamActivity"
