@@ -27,7 +27,6 @@ public class SearchStream extends AppCompatActivity {
     static String SELECTED_STREAM = "com.ee382v.sparrow.viewallstream.SELECTED_STREAM";
     private Button search;
     private EditText searchText;
-    public static final String SEARCH_STRING = "search";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,8 @@ public class SearchStream extends AppCompatActivity {
         //String user = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         String user_email = MainActivity.getUserEmail();
         String searchString = intent.getStringExtra(ViewAllStream.SEARCH_STRING);
-
+        searchText = (EditText) findViewById(R.id.viewAllSearchText);
+        search = (Button) findViewById(R.id.viewAllSearchBtn);
         String url = MainActivity.getEndpoint() + "/android/search?keyword=" + searchString;
         Log.w("url: ", url);
         searchText.setVisibility(View.VISIBLE);
@@ -86,15 +86,15 @@ public class SearchStream extends AppCompatActivity {
         Intent intent = new Intent(this, ViewNearbyStream.class);
         startActivity(intent);
     }
+
     public void goToSearchPage(View view) {
-        //TODO
         String searchString  = "";
         //SearchView searchView = findViewById(R.id.viewAllSearchText);
         //String searchString = findViewById(R.id.viewAllSearchText).toString();
         EditText editText = (EditText) findViewById(R.id.viewAllSearchText);
         searchString = editText.getText().toString();
         Intent intent = new Intent(this,SearchStream.class);
-        intent.putExtra(SEARCH_STRING,searchString);
+        intent.putExtra(ViewAllStream.SEARCH_STRING,searchString);
         startActivity(intent);
     }
 }

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // 10.0.2.2 is the localhost on dev machine
     //Now the End_Point is my deployed project for the convience of testing
-    private static final String BACKEND_ENDPOINT = "https://connex-xiaocheng.appspot.com";
+    private static final String BACKEND_ENDPOINT = "https://minitrial-181200.appspot.com/";
     public static final String EXTRA_MESSAGE = "com.ees82v.sparrow.mainactivity";
     private Button SignOut;
     private SignInButton SignIn;
@@ -57,20 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mVideoView = (VideoView)findViewById(R.id.bgvideoview);
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.ut);
-        mVideoView.setVideoURI(uri);
-        mVideoView.start();
-
-        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);
-
-            }
-        });
-
         loginButton = (LoginButton)findViewById(R.id.login_button);
         loginButton.setReadPermissions("email","public_profile");
 
@@ -117,10 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
         }
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
     }
-
-
-
 
     public static String getUserEmail(){
         return email;
@@ -232,6 +218,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mVideoView = (VideoView)findViewById(R.id.bgvideoview);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.ut);
+        mVideoView.setVideoURI(uri);
+        mVideoView.start();
+
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
 
 
     @Override
