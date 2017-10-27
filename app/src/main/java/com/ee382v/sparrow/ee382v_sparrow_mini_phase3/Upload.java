@@ -19,6 +19,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -69,6 +70,7 @@ public class Upload extends AppCompatActivity implements GoogleApiClient.Connect
     private double latitude = 0, longitude = 0;
     String gps_info;
     public static final String TAG = Upload.class.getSimpleName();
+    private EditText commentText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -257,7 +259,6 @@ public class Upload extends AppCompatActivity implements GoogleApiClient.Connect
                     Log.d("image", "lat: " + lat);
                     Log.d("image", "long: " + longG);
 
-
                     if(status.equals("ok")){
                         if(progressDialog.isShowing()) progressDialog.dismiss();
                     }
@@ -307,7 +308,9 @@ public class Upload extends AppCompatActivity implements GoogleApiClient.Connect
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                commentText = (EditText) findViewById(R.id.commentBox);
                 Log.d("tag", "gps_info: " + gps_info);
+                params.put("tags", commentText.getText().toString());
                 params.put("lat", Double.toString(latitude));
                 params.put("long", Double.toString(longitude));
                 params.put("title", filename);
@@ -321,7 +324,7 @@ public class Upload extends AppCompatActivity implements GoogleApiClient.Connect
                 Map<String, DataPart> params = new HashMap<>();
                 // file name could found file base or direct access from real path
                 // for now just get bitmap data from ImageView
-                params.put("image", new DataPart("trial", AppHelper.getFileDataFromDrawable(getBaseContext(), ivPreview.getDrawable()), "image/jpeg"));
+                params.put("image", new DataPart(filename, AppHelper.getFileDataFromDrawable(getBaseContext(), ivPreview.getDrawable()), "image/jpeg"));
                 return params;
             }
         };

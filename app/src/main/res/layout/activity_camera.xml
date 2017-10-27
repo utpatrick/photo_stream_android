@@ -71,7 +71,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_weight="1"
                 android:onClick="goToView"
-                android:text="gotoview" />
+                android:text="view all stream" />
         </LinearLayout>
 
         <ImageView
