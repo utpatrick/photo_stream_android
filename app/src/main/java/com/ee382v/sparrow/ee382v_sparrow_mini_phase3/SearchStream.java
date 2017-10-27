@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -23,11 +25,16 @@ import java.util.ArrayList;
 public class SearchStream extends AppCompatActivity {
 
     static String SELECTED_STREAM = "com.ee382v.sparrow.viewallstream.SELECTED_STREAM";
+    private Button search;
+    private EditText searchText;
+    public static final String SEARCH_STRING = "search";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_stream);
+        searchText = (EditText)findViewById(R.id.viewAllSearchText);
+        search = (Button)findViewById(R.id.viewAllSearchBtn);
         Intent intent = getIntent();
         //this line is for testing only
         //String user = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
@@ -36,6 +43,8 @@ public class SearchStream extends AppCompatActivity {
 
         String url = MainActivity.getEndpoint() + "/android/search?keyword=" + searchString;
         Log.w("url: ", url);
+        searchText.setVisibility(View.VISIBLE);
+        search.setVisibility(View.VISIBLE);
         JsonArrayRequest jsonRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -75,6 +84,17 @@ public class SearchStream extends AppCompatActivity {
 
     public void goToNearbyStreams(View view) {
         Intent intent = new Intent(this, ViewNearbyStream.class);
+        startActivity(intent);
+    }
+    public void goToSearchPage(View view) {
+        //TODO
+        String searchString  = "";
+        //SearchView searchView = findViewById(R.id.viewAllSearchText);
+        //String searchString = findViewById(R.id.viewAllSearchText).toString();
+        EditText editText = (EditText) findViewById(R.id.viewAllSearchText);
+        searchString = editText.getText().toString();
+        Intent intent = new Intent(this,SearchStream.class);
+        intent.putExtra(SEARCH_STRING,searchString);
         startActivity(intent);
     }
 }

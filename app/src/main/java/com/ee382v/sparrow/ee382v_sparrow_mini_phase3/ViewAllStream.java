@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -30,6 +31,7 @@ public class ViewAllStream extends AppCompatActivity {
     String user_email = MainActivity.getUserEmail();
     public static final String SEARCH_STRING = "search";
     static String SUB_STREAM = "com.ee382v.sparrow.viewallstream.SUB_STREAM";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,7 @@ public class ViewAllStream extends AppCompatActivity {
     }
 
     public void goToSearchPage(View view) {
+
         String searchString  = "";
         //SearchView searchView = findViewById(R.id.viewAllSearchText);
         //String searchString = findViewById(R.id.viewAllSearchText).toString();
@@ -111,5 +114,6 @@ public class ViewAllStream extends AppCompatActivity {
         Intent intent = new Intent(this, ViewOneStream.class);
         intent.putExtra(SUB_STREAM, "subscribed by " + MainActivity.getUserName());
         startActivity(intent);
+
     }
 }
