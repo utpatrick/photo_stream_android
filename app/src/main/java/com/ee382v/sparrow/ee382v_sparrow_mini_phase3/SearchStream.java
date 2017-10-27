@@ -32,6 +32,8 @@ public class SearchStream extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_stream);
+        searchText = (EditText)findViewById(R.id.viewAllSearchText);
+        search = (Button)findViewById(R.id.viewAllSearchBtn);
         Intent intent = getIntent();
         //this line is for testing only
         //String user = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
@@ -41,6 +43,8 @@ public class SearchStream extends AppCompatActivity {
         search = (Button) findViewById(R.id.viewAllSearchBtn);
         String url = MainActivity.getEndpoint() + "/android/search?keyword=" + searchString;
         Log.w("url: ", url);
+        searchText.setVisibility(View.VISIBLE);
+        search.setVisibility(View.VISIBLE);
         JsonArrayRequest jsonRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
