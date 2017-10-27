@@ -60,7 +60,7 @@ public class GridViewAdapter extends ArrayAdapter<GridItem> {
         if (link == null || link.length() < 1 || link.startsWith("/static/images/")) {
             Picasso.with(mContext).load(R.drawable.default_image).into(holder.imageView);
         } else {
-            Picasso.with(mContext).load(item.getLink()).into(holder.imageView);
+            Picasso.with(mContext).load(item.getLink()).resize(100, 100).into(holder.imageView);
         }
         return view;
     }
