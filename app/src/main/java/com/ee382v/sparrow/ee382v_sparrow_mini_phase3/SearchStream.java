@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -23,6 +25,8 @@ import java.util.ArrayList;
 public class SearchStream extends AppCompatActivity {
 
     static String SELECTED_STREAM = "com.ee382v.sparrow.viewallstream.SELECTED_STREAM";
+    private Button search;
+    private EditText searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,8 @@ public class SearchStream extends AppCompatActivity {
         //String user = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         String user_email = MainActivity.getUserEmail();
         String searchString = intent.getStringExtra(ViewAllStream.SEARCH_STRING);
-
+        searchText = (EditText) findViewById(R.id.viewAllSearchText);
+        search = (Button) findViewById(R.id.viewAllSearchBtn);
         String url = MainActivity.getEndpoint() + "/android/search?keyword=" + searchString;
         Log.w("url: ", url);
         JsonArrayRequest jsonRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
@@ -75,6 +80,17 @@ public class SearchStream extends AppCompatActivity {
 
     public void goToNearbyStreams(View view) {
         Intent intent = new Intent(this, ViewNearbyStream.class);
+        startActivity(intent);
+    }
+
+    public void goToSearchPage(View view) {
+        String searchString  = "";
+        //SearchView searchView = findViewById(R.id.viewAllSearchText);
+        //String searchString = findViewById(R.id.viewAllSearchText).toString();
+        EditText editText = (EditText) findViewById(R.id.viewAllSearchText);
+        searchString = editText.getText().toString();
+        Intent intent = new Intent(this,SearchStream.class);
+        intent.putExtra(ViewAllStream.SEARCH_STRING,searchString);
         startActivity(intent);
     }
 }

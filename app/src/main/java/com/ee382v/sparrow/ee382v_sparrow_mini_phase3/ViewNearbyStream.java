@@ -44,11 +44,6 @@ public class ViewNearbyStream extends AppCompatActivity implements GoogleApiClie
                     .addApi(LocationServices.API)
                     .build();
         }
-
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] { android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
-        }
-
     }
 
     protected void onStart() {
@@ -94,9 +89,12 @@ public class ViewNearbyStream extends AppCompatActivity implements GoogleApiClie
     private void makeRequest() {
         double latitude = 0, longitude = 0;
         if (location != null) {
+            Log.d("lat", "location: " + "yes");
             latitude = location.getLatitude();
             longitude = location.getLongitude();
         }
+        Log.d("lat", "lat: " + latitude);
+        Log.d("long", "long: " + longitude);
         String url = MainActivity.getEndpoint() + "/android/view_nearby_images?latitude=" + latitude +
                 "&longitude=" + longitude + "&start=" + start;
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
