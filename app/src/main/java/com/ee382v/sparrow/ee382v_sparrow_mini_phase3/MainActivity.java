@@ -8,10 +8,20 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
-
+import android.support.annotation.NonNull;
+import android.widget.Button;
+import android.widget.TextView;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -25,7 +35,6 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
-
 
     // 10.0.2.2 is the localhost on dev machine
     //Now the End_Point is my deployed project for the convience of testing
@@ -60,6 +69,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static String getUserEmail(){
         return email;
+    }
+
+    public static String getUserName() {
+        return name;
     }
 
     public void goToView(View view) {

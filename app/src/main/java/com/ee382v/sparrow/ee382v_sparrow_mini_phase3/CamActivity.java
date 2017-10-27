@@ -88,6 +88,8 @@ public class CamActivity extends AppCompatActivity {
         });
 
         Toast.makeText(ctx, getString(R.string.take_photo_help), Toast.LENGTH_LONG).show();
+        Button usePhotoButton = (Button)findViewById(R.id.use_this_photo);
+        usePhotoButton.setEnabled(false);
     }
 
     @Override
@@ -145,6 +147,8 @@ public class CamActivity extends AppCompatActivity {
             new SaveImageTask().execute(data);
             resetCam();
             Log.d(TAG, "onPictureTaken - jpeg");
+            Button usePhotoButton = (Button)findViewById(R.id.use_this_photo);
+            usePhotoButton.setEnabled(true);
             capturedImageHolder.setImageBitmap(scaleDownBitmapImage(bitmap, 300, 200));
         }
     };
