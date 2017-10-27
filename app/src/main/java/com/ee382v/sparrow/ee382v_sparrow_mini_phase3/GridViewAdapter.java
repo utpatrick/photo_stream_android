@@ -57,7 +57,6 @@ public class GridViewAdapter extends ArrayAdapter<GridItem> {
         if (item.getExtra() != null) holder.titleTextView.setTag(item.getExtra());
         holder.imageView.setTag(item.getLink());
         String link = item.getLink();
-        Log.w("in adapter", link);
         if (link == null || link.length() < 1 || link.startsWith("/static/images/")) {
             Picasso.with(mContext).load(R.drawable.default_image).into(holder.imageView);
         } else {
