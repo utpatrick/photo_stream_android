@@ -9,7 +9,7 @@
         android:id="@+id/view_image_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:adjustViewBounds="true"/>
     <TextView
         android:id="@+id/view_image_title"
