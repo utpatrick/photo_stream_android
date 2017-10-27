@@ -3,25 +3,25 @@ package com.ee382v.sparrow.ee382v_sparrow_mini_phase3;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.support.annotation.NonNull;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
-import android.support.annotation.NonNull;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.VideoView;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -34,6 +34,8 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
 
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
 
     // 10.0.2.2 is the localhost on dev machine
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button SignOut;
     private SignInButton SignIn;
     private GoogleApiClient googleApiClient;
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
+    private VideoView mVideoView;
     private static final int REQ_CODE = 9001;
     static String name;
     static String email;
@@ -52,6 +57,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mVideoView = (VideoView)findViewById(R.id.bgvideoview);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.ut);
+        mVideoView.setVideoURI(uri);
+        mVideoView.start();
+
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+
+            }
+        });
+
+        loginButton = (LoginButton)findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email","public_profile");
+
+        callbackManager = CallbackManager.Factory.create();
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                String user_id = loginResult.getAccessToken().getUserId();
+                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        updateUI(true);
+
+
+                    }
+                });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields","first_name, last_name, email, id");
+                graphRequest.setParameters(parameters);
+                graphRequest.executeAsync();
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
 
         SignOut = (Button)findViewById(R.id.bn_logout);
         SignIn = (SignInButton)findViewById(R.id.bn_login);
@@ -69,6 +121,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         }
     }
+
+
+
 
     public static String getUserEmail(){
         return email;
@@ -146,11 +201,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Name.setVisibility(View.VISIBLE);
             SignIn.setVisibility(View.GONE);
             SignOut.setVisibility(View.VISIBLE);
+            loginButton.setVisibility(View.GONE);
+            mVideoView = (VideoView)findViewById(R.id.bgvideoview);
+            Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.ut);
+            mVideoView.setVideoURI(uri);
+            mVideoView.start();
+
+            mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.setLooping(true);
+
+                }
+            });
         }
         else{
             //Name.setVisibility(View.GONE);
             SignIn.setVisibility(View.VISIBLE);
             SignOut.setVisibility(View.GONE);
+            loginButton.setVisibility(View.VISIBLE);
+            mVideoView = (VideoView)findViewById(R.id.bgvideoview);
+            Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.ut);
+            mVideoView.setVideoURI(uri);
+            mVideoView.start();
+
+            mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.setLooping(true);
+
+                }
+            });
+
         }
     }
 
@@ -158,11 +240,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == REQ_CODE){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleResult(result);
         }
 
+    }
+    public void goToViewAllStreams(View view) {
+        Intent intent = new Intent(this, ViewAllStream.class);
+        startActivity(intent);
     }
 }
