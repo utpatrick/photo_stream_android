@@ -11,6 +11,13 @@
     android:orientation="vertical"
     tools:context="com.ee382v.sparrow.ee382v_sparrow_mini_phase3.MainActivity">
 
+    <TextView
+        android:id="@+id/streamNameField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.20"
+        android:text="TextView" />
+
     <Button
         android:id="@+id/selectFromGalleryBtn"
         android:layout_width="wrap_content"
@@ -72,5 +79,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteY="447dp" />
+
 
 </LinearLayout>
