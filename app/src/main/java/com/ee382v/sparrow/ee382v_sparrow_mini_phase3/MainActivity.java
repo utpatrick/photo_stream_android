@@ -57,6 +57,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loginButton = (LoginButton)findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email","public_profile");
+
+        callbackManager = CallbackManager.Factory.create();
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                String user_id = loginResult.getAccessToken().getUserId();
+                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        updateUI(true);
+
+
+                    }
+                });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields","first_name, last_name, email, id");
+                graphRequest.setParameters(parameters);
+                graphRequest.executeAsync();
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
 
         mVideoView = (VideoView)findViewById(R.id.bgvideoview);
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.ut);
@@ -235,6 +268,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mVideoView = (VideoView)findViewById(R.id.bgvideoview);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.ut);
+        mVideoView.setVideoURI(uri);
+        mVideoView.start();
+
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
 
 
     @Override

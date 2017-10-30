@@ -21,18 +21,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -41,9 +38,7 @@ import com.google.android.gms.location.LocationServices;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,11 +85,30 @@ public class Upload extends AppCompatActivity implements GoogleApiClient.Connect
                 android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         }
-
         Intent intent = getIntent();
         streamName = intent.getStringExtra(ViewOneStream.THIS_STREAM);
         Log.d("stream", "stream name:  " + streamName);
+
+        TextView streamNameText = (TextView) findViewById(R.id.streamNameField);
+        streamNameText.setText("Now You Are In Stream: "+ " " +streamName);
+
+
+        uploadButton = (Button) findViewById(R.id.uploadBtn);
+
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        }
         uploadButton.setEnabled(false);
+
     }
 
     public void goToCamera(View view) {
@@ -162,14 +176,14 @@ public class Upload extends AppCompatActivity implements GoogleApiClient.Connect
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         mGoogleApiClient.connect();
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }

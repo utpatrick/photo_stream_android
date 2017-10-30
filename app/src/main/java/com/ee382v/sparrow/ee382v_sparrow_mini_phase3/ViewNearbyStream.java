@@ -3,10 +3,9 @@ package com.ee382v.sparrow.ee382v_sparrow_mini_phase3;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.support.v4.app.ActivityCompat;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
@@ -46,16 +45,19 @@ public class ViewNearbyStream extends AppCompatActivity implements GoogleApiClie
         }
     }
 
-    protected void onStart() {
+    @Override
+    protected void onResume() {
+        super.onResume();
         mGoogleApiClient.connect();
-        super.onStart();
     }
 
-    protected void onStop() {
-        mGoogleApiClient.disconnect();
-        super.onStop();
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
     }
-
 
     @Override
     public void onConnected(Bundle bundle) {
