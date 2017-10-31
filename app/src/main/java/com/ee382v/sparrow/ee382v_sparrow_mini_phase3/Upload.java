@@ -278,15 +278,22 @@ public class Upload extends AppCompatActivity implements GoogleApiClient.Connect
                     }
                     AlertDialog alertDialog = new AlertDialog.Builder(Upload.this).create();
                     alertDialog.setTitle("Upload Successful!");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Go To View",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    Intent intent = new Intent(Upload.this, ViewOneStream.class);
+                                    intent.putExtra(ViewAllStream.SELECTED_STREAM, streamName);
+                                    startActivity(intent);
+                                }
+                            });
+                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Continue Uploading",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
                                 }
                             });
                     alertDialog.show();
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

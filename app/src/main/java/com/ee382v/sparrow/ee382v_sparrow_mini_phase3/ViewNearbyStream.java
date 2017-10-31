@@ -27,6 +27,7 @@ public class ViewNearbyStream extends AppCompatActivity implements GoogleApiClie
     private GoogleApiClient mGoogleApiClient;
     private Location location;
     private int start = 0;
+    public static final String TAG = Upload.class.getSimpleName();
 
     static String SELECTED_STREAM = "com.ee382v.sparrow.viewnearbystream.SELECTED_STREAM";
     @Override
@@ -61,6 +62,7 @@ public class ViewNearbyStream extends AppCompatActivity implements GoogleApiClie
 
     @Override
     public void onConnected(Bundle bundle) {
+        Log.i(TAG, "ViewNearby, Location services connected.");
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
